@@ -1,0 +1,70 @@
+# ============================================================
+# 重庆人口老龄化与医疗压力数据挖掘 — 项目配置文件
+# ============================================================
+
+project:
+  name: "重庆人口老龄化与医疗压力数据挖掘"
+  version: "1.0.0"
+  author: "CQ Data Mining Team"
+  date_range: "2016-2024"
+
+paths:
+  root: "I:/Chongqing Population Aging &Healthcare Pressure Data Mining"
+  data_raw: "data/raw"
+  data_processed: "data/processed"
+  data_geo: "data/geo"
+  notebooks: "notebooks"
+  output_figures: "output/figures"
+  output_reports: "output/reports"
+  output_tables: "output/tables"
+
+data_sources:
+  population:
+    - name: "重庆市统计局年度人口数据"
+      file: "data/raw/population/cq_population_2016_2024.xlsx"
+      description: "各区县常住人口、户籍人口、年龄结构"
+    - name: "重庆市统计年鉴"
+      file: "data/raw/population/cq_statistical_yearbook.xlsx"
+      description: "历年分区县人口结构数据"
+  healthcare:
+    - name: "重庆市卫健委住院统计数据"
+      file: "data/raw/healthcare/cq_hospitalization_2016_2024.xlsx"
+      description: "各区县医疗机构老年住院人次、疾病分类"
+    - name: "重庆市医疗卫生机构概况"
+      file: "data/raw/healthcare/cq_medical_institutions.xlsx"
+      description: "医院数量、床位数、医护人员数"
+  sentiment:
+    - name: "抖音评论数据"
+      file: "data/raw/sentiment/douyin_comments.csv"
+      description: "抖音平台老龄化相关短视频评论"
+    - name: "快手评论数据"
+      file: "data/raw/sentiment/kuaishou_comments.csv"
+      description: "快手平台老龄化相关短视频评论"
+  geo:
+    - name: "重庆市行政区划GeoJSON"
+      file: "data/geo/chongqing_districts.geojson"
+      description: "重庆市38个区县边界数据"
+
+analysis:
+  population:
+    aging_rate_thresholds:
+      low: 0.18
+      medium: 0.25
+      high: 0.30
+  healthcare:
+    base_year: 2016
+    target_year: 2024
+    chronic_diseases: ["心衰", "高血压", "糖尿病", "慢性阻塞性肺疾病", "脑卒中"]
+  sentiment:
+    positive_threshold: 0.5
+    negative_threshold: 0.2
+    platforms: ["douyin", "kuaishou"]
+
+visualization:
+  heatmap:
+    tile: "OpenStreetMap"
+    zoom_start: 10
+    location: [29.5, 107.5]
+  report:
+    page_count: 12
+    language: "zh-CN"
